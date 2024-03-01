@@ -84,14 +84,16 @@ body {
     border-bottom: 1px solid #eee;
   }
   li > input[type="checkbox"] {
-    margin: 0 10px;
+    margin: 0px 10px;
     position: relative;
     top: 15px;
+    background-color: black;
+    
   }
   li > label {
     font-size: 18px;
     line-height: 40px;
-    width: 237px;
+    #width: 237px;
     padding: 0 0 0 11px;
   }
   li >  input[type="text"] {
@@ -107,8 +109,26 @@ body {
     font-weight: bold;
     color: green;
   }
+
+  li > input[type="delete"] {
+    margin: 0px 10px;
+    position: relative;
+    top: 15px;
+    align-items: center; /* Vertically center the button */
+    background-color: black;
+    
+  }
+  .material-icons {
+    margin: 10px 0px;
+    font-size: 24px; /* Adjust the size of the icon */
+    color: red; /* Change the color of the icon */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Add pointer cursor on hover */
+    position: relative;
+
+}
   
-  /* Edit Task */
+  /* Edit Task *
   ul li input[type=text] {
     display:none;
   }
@@ -120,3 +140,5 @@ body {
   ul li.editMode label {
     display:none;
   }
+
+ 

@@ -1,27 +1,40 @@
 
 class HTMLHelper {
 
-    static createList(task:Task) : HTMLLIElement
-    {
+    static createList(task:Task) {
         const li = document.createElement('li');
-        const checkbox = document.createElement('input');
         const label = document.createElement('label');
-
-        checkbox.id = task.getId();
-        checkbox.type = 'checkbox'; 
         label.textContent = task.getId();
+        if (task.isComplete())
+        {
+            const button = document.createElement('delete');
+            button.classList.add('material-icons'); // Add Material Icons class
+            button.textContent = 'delete';
 
-        li.appendChild(checkbox);
-        li.appendChild(label);
-
-        checkbox.addEventListener('click', () => {
-            if (checkbox.checked) {
-                task.setCompleted();
+            button.addEventListener('click', () => {
+                taskManager.remove(task);
                 displayLists();
-            }
-
-        });
-
+            });
+    
+    
+            li.appendChild(button);
+            li.appendChild(label);
+        }
+        else
+        {
+            const checkbox = document.createElement('input');
+            checkbox.id = task.getId();
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('click', () => {
+                if (checkbox.checked) {
+                    task.setCompleted();
+                    displayLists();
+                }
+            });
+        
+            li.appendChild(checkbox);
+            li.appendChild(label);
+        }
         return li;
     }
 }
@@ -96,6 +109,11 @@ class TaskManager
     {
         return this.tasks;
     }
+
+    remove(task:Task)
+    {
+        this.tasks = this.tasks.filter((task1) => task1 !== task)
+    }
 }
 
 let taskManager = new TaskManager();
@@ -108,7 +126,6 @@ const incompletedContainer = document.getElementById('incompleted-tasks')!;
 button.addEventListener('click', () => {
     // Code to execute when the button is pressed
 
-    console.log("button clicked");
     if (inputBox.value.trim() != '') {
         const inputValue = inputBox.value;
         taskManager.addTask(inputBox.value);
@@ -142,4 +159,19 @@ function displayLists()
 
     })
 }
+
+// Recursive function to efficiently calculate the Fibonacci sequence up to a given number
+function fibonacciRecursive(n: number): number {
+    // Base case: if n is 0 or 1, return n
+    if (n <= 1) {
+        return n;
+    }
+
+    // Recursive calls to calculate Fibonacci numbers
+    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
+}
+
+// Test the function with an example input
+const result = fibonacciRecursive(11);
+console.log(result); // Output: 55
 
